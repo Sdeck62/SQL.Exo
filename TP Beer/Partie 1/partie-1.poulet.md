@@ -17,18 +17,9 @@ formateur de vous aider ou de vous donner le docker-compose.
 
 - Quelles sont les tables ?
 
-- article 
-- continent 
-- couleur 
-- fabricant 
-- marque
-- pays
-- ticket
-- type 
-- ventes 
-
 ### Il y a des mauvaises pratiques dans ce modèle, lesquelles ?
 
+- Regardez bien les tables et les colonnes, vous devriez trouver des choses qui ne vont pas
 
 ## Exercices
 
@@ -37,58 +28,73 @@ Réalisez les requêtes suivantes :
 ### Quels sont les tickets qui comportent l’article d’ID 500, afficher le numéro de ticket uniquement ?
 
 ```mysql
-    SELECT NUMERO_TICKET FROM ventes WHERE id_article = 500
 
 ```
+
+- Il n'y a pas de jointure à faire : tout est déjà dans la table `ventes`
 
 ### Afficher les tickets du 15/01/2014.
 
 ```mysql
-    SELECT 'date_vente'  FROM 'ticket' WHERE date_vente='2014-01-15'
+
 ```
+
+- La requête est très similaire à la précédente
 
 ### Afficher les tickets émis du 15/01/2014 et le 17/01/2014.
 
 ```mysql
-    SELECT 'annee' 'numero_ticket' 'date_ventes' FROM 'TICKET' WHERE date_vente  BETWEEN '2014-01-15' AND '2014-01-17'
+
 ```
-### Afficher la liste des articles apparaissant à 50 et plus exemplaires sur un ticket.
+
+- Vous aurez besoin de la clause `BETWEEN` pour cette requête
+
+
+### Editer la liste des articles apparaissant à 50 et plus exemplaires sur un ticket.
 
 ```mysql
-    SELECT 'numero_ticket' 'id_article' 'quantite' FROM 'vente' WHERE quantite >= 50
+
 ```
+
+- La table qui vous intéresse est la table `ventes`
+- Vous devrez faire une jointure avec la table `article`
+
 ### Quelles sont les tickets émis au mois de mars 2014.
 
 ```mysql
-    SELECT 'numero_ticket' 'id_article' FROM 'ticket' WHERE date_vente BETWEEN '2014-03-01' AND '2014-03-31'
 
 ```
+
+- Vous aurez besoin de fonctions de temps pour cette requête
+
 
 ### Quelles sont les tickets émis entre les mois de mars et avril 2014 ?
 
 ```mysql
-    SELECT 'numero_ticket' FROM 'ticket' WHERE date_vente BETWEEN '2014-03-01' AND '2014-04-31'
-
 
 ```
+
+- Vous devrez utiliser la clause `IN` pour cette requête
 
 ### Quelles sont les tickets émis au mois de mars et juin 2014 ?
 
 ```mysql
-    SELECT 'numero_ticket' FROM 'ticket' WHERE date_vente='2014-03-01' AND '2014-06-31'
 
 ```
 
 ### Afficher la liste des bières classée par couleur. (Afficher l’id et le nom)
 
 ```mysql
-    SELECT 'id_article' 'nom_article' 'id_couleur' FROM article WHERE 'id_couleur' IS NOT NULL ORDER BY 'id_couleur';
+
 ```
+
+- Vous aurez besoin d'une jointure avec la table `couleur`
+- Vous devrez utiliser la clause `ORDER BY`
 
 ### Afficher la liste des bières n’ayant pas de couleur. (Afficher l’id et le nom)
 
 ```mysql
-    SELECT 'id_article' 'nom_article' 'id_couleur' FROM article WHERE 'id_couleur' IS NULL;
-
 
 ```
+
+- La table qui vous intéresse est la table `article`
